@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Instructor de Logística: aplicación local que evalúa documentos, presentaciones, imágenes y video, y devuelve retroalimentación como de un instructor real. PDF, Word, Excel, PowerPoint, imágenes y video. Procesamiento local y sin instalación.">
+<meta name="theme-color" content="#07231e">
+<meta name="color-scheme" content="light">
+<title>Instructor de Logística — Evaluador de entregas</title>
+<link rel="stylesheet" href="/estilos.css?v=6">
+</head>
+<body>
+
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="sitio-header">
+  <div class="contenedor cabecera-interna">
+    <a class="marca" href="#inicio" aria-label="Instructor de Logística: volver al inicio">
+      <span class="marca-logo" aria-hidden="true">IL</span>
+      <span class="marca-texto">
+        <span class="marca-nombre">Instructor de Logística</span>
+        <span class="marca-sub">Evaluador de entregas</span>
+      </span>
+    </a>
+
+    <nav class="nav-principal" aria-label="Secciones de la página">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#evaluador">Evaluador</a>
+      <a href="#formatos">Formatos</a>
+      <a href="#retroalimentacion">Retroalimentación</a>
+    </nav>
+
+    <div class="estado" id="estadoServicio" role="status" aria-live="polite" title="Estado del servicio">
+      <span class="punto" id="puntoEstado" aria-hidden="true"></span>
+      <span class="estado-texto" id="textoEstado">Comprobando…</span>
+    </div>
+  </div>
+</header>
+
+<main id="contenido" tabindex="-1">
+
+  <noscript>
+    <div class="contenedor">
+      <p class="aviso-noscript">Esta aplicación necesita JavaScript activado para funcionar.</p>
+    </div>
+  </noscript>
+
+  <!-- Hero -->
+  <section class="hero" id="inicio" aria-labelledby="titulo-hero">
+    <div class="hero-decoracion" aria-hidden="true"></div>
+    <div class="contenedor hero-inner">
+
+      <div class="hero-copy">
+        <p class="hero-antetitulo">
+          <span class="pulso" aria-hidden="true"></span>
+          Evaluador de entregas · Procesamiento local
+        </p>
+
+        <h1 id="titulo-hero">Instructor de<br><span class="hero-resalte">Logística</span></h1>
+
+        <p class="hero-lema">Sube tu trabajo y recibe retroalimentación como de un instructor real</p>
+
+        <p class="hero-apoyo">
+          Sube informes, hojas de cálculo, presentaciones, imágenes o video. La aplicación lee el
+          contenido por sí sola y lo evalúa con las instrucciones que tú definas.
+        </p>
+
+        <div class="hero-acciones">
+          <a class="boton boton-primario" href="#evaluador">
+            Evaluar mi trabajo
+            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false">
+              <path d="M4 10h11M10.5 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a class="boton boton-fantasma" href="#formatos">Ver formatos admitidos</a>
+        </div>
+
+        <ul class="hero-datos" role="list">
+          <li>
+            <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
+              <path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            PDF, Word, Excel y PowerPoint
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
+              <path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Imágenes y fotogramas de video
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
+              <path d="m4 10.5 4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Procesamiento local
+          </li>
+        </ul>
+      </div>
+
+      <div class="hero-visual">
+        <div class="demo-ventana" aria-hidden="true">
+          <div class="demo-barra">
+            <span class="demo-puntos"><span></span><span></span><span></span></span>
+            <span class="demo-barra-titulo">Retroalimentación del instructor</span>
+            <span class="demo-barra-chip">Vista previa</span>
+          </div>
+
+          <div class="demo-cuerpo">
+            <ol class="demo-bloques">
+              <li>
+                <span class="demo-num">01</span>
+                <span class="demo-bloque-texto"><strong>Qué observé</strong><small>Resumen de lo entregado</small></span>
+              </li>
+              <li>
+                <span class="demo-num">02</span>
+                <span class="demo-bloque-texto"><strong>Lo que está bien</strong><small>Aciertos con evidencia del documento</small></span>
+              </li>
+              <li>
+                <span class="demo-num">03</span>
+                <span class="demo-bloque-texto"><strong>Lo que hay que mejorar</strong><small>Qué falta y cómo corregirlo</small></span>
+              </li>
+              <li>
+                <span class="demo-num">04</span>
+                <span class="demo-bloque-texto"><strong>Recomendaciones</strong><small>Acciones prácticas y medibles</small></span>
+              </li>
+              <li>
+                <span class="demo-num">05</span>
+                <span class="demo-bloque-texto"><strong>Cierre</strong><small>Un comentario de ánimo, realista</small></span>
+              </li>
+            </ol>
+
+            <div class="demo-tabla">
+              <div class="demo-fila demo-cabecera">
+                <span>Indicadores de logro</span><span>SÍ</span><span>NO</span>
+              </div>
+              <div class="demo-fila">
+                <span>Jerarquía de cargos</span>
+                <span class="demo-marca">✓ <b>20%</b></span>
+                <span class="demo-vacio">—</span>
+              </div>
+              <div class="demo-fila">
+                <span>Necesidades del departamento</span>
+                <span class="demo-marca">✓ <b>20%</b></span>
+                <span class="demo-vacio">—</span>
+              </div>
+              <div class="demo-fila">
+                <span>Plan de acción con fechas</span>
+                <span class="demo-vacio">—</span>
+                <span class="demo-marca demo-marca-negativa">✓</span>
+              </div>
+            </div>
+
+            <div class="demo-total">
+              <span class="demo-total-etiqueta">TOTAL</span>
+              <span class="demo-chip">Aprobado</span>
+              <strong>3.3 de 5</strong>
+            </div>
+          </div>
+        </div>
+        <p class="demo-pie">Vista ilustrativa de la retroalimentación y su lista de verificación.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Cómo funciona -->
+  <section class="seccion" id="como-funciona" aria-labelledby="titulo-como">
+    <div class="contenedor">
+      <header class="encabezado-seccion">
+        <p class="antetitulo">Cómo funciona</p>
+        <h2 id="titulo-como">Tres pasos, del archivo a la retroalimentación</h2>
+        <p class="seccion-intro">
+          La aplicación lee el documento por sí sola: texto, tablas, imágenes, diapositivas y hasta
+          fotogramas de video. Tú solo eliges el archivo y defines cómo debe evaluarse.
+        </p>
+      </header>
+
+      <ol class="pasos-lista">
+        <li class="tarjeta-paso">
+          <span class="paso-fantasma" aria-hidden="true">01</span>
+          <span class="icono-cuadro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 15v3.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Sube el documento o material a evaluar</h3>
+          <p>No tienes que escribir ni copiar nada del documento. Solo selecciónalo o arrástralo aquí.</p>
+          <p class="paso-detalle">PDF (incluye escaneados) · Word · Excel · PowerPoint · Imágenes · Video · Texto</p>
+        </li>
+
+        <li class="tarjeta-paso">
+          <span class="paso-fantasma" aria-hidden="true">02</span>
+          <span class="icono-cuadro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path d="M5 5.5h14M5 10h14M5 14.5h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M15 17.5h4M17 15.5v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Indica cómo debe evaluarse</h3>
+          <p>Escribe las instrucciones o súbelas como archivo (PDF, Word, Excel, imagen…). Si dejas esto vacío, se evaluará con criterios generales de logística.</p>
+          <p class="paso-detalle">Si quieres un formato exacto, pega o sube tus instrucciones tal como las tienes.</p>
+        </li>
+
+        <li class="tarjeta-paso">
+          <span class="paso-fantasma" aria-hidden="true">03</span>
+          <span class="icono-cuadro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path d="M6 4.5h8.5L19 9v10.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="m8.5 14 2.2 2.2 4.3-4.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3>Pulsa «Evaluar mi trabajo»</h3>
+          <p>Lee la retroalimentación y revisa la lista de verificación final. Puedes copiarla o descargarla cuando la necesites.</p>
+          <p class="paso-detalle">La calificación final aparece en la fila TOTAL de la tabla.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Evaluador -->
+  <section class="seccion seccion-evaluador" id="evaluador" aria-labelledby="titulo-evaluador">
+    <div class="contenedor">
+      <header class="encabezado-seccion">
+        <p class="antetitulo">La aplicación</p>
+        <h2 id="titulo-evaluador">Evalúa tu entrega aquí</h2>
+        <p class="seccion-intro">
+          Selecciona el documento, indica cómo debe evaluarse y pulsa Evaluar mi trabajo. Si dejas las
+          instrucciones vacías, se aplica un criterio general de logística.
+        </p>
+      </header>
+
+      <div class="evaluador-marco">
+        <div class="pasos-formulario">
+
+          <div class="paso-formulario">
+            <div class="paso-cabecera">
+              <span class="paso-numero" aria-hidden="true">1</span>
+              <div class="paso-titulos">
+                <h3>Sube el documento o material a evaluar</h3>
+                <p class="paso-ayuda">No tienes que escribir ni copiar nada del documento. Solo selecciónalo o arrástralo aquí.</p>
+              </div>
+            </div>
+
+            <div class="zona-soltar" id="zonaDocumento" tabindex="0" role="button" aria-label="Seleccionar el documento a evaluar">
+              <span class="zona-icono" aria-hidden="true">
+                <svg viewBox="0 0 48 48" width="44" height="44">
+                  <path d="M24 32V10m0 0-7.5 7.5M24 10l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 30v5.5A3.5 3.5 0 0 0 13.5 39h21a3.5 3.5 0 0 0 3.5-3.5V30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <p class="zona-titulo">Arrastra el archivo aquí</p>
+              <p class="zona-sub">o haz clic para buscarlo en tu equipo</p>
+              <p class="zona-formatos">PDF (incluye escaneados) · Word · Excel · PowerPoint · Imágenes · Video · Texto</p>
+            </div>
+            <input type="file" id="archivoDocumento" hidden
+                   accept=".pdf,.docx,.docm,.doc,.rtf,.odt,.xlsx,.xlsm,.xls,.ods,.csv,.tsv,.pptx,.ppsx,.ppt,.odp,.png,.jpg,.jpeg,.webp,.gif,.bmp,.tif,.tiff,.heic,.avif,.mp4,.mov,.avi,.mkv,.webm,.wmv,.flv,.m4v,.mpeg,.mpg,.3gp,.txt,.md,.log,.json,.xml,.html,.htm,.srt,.vtt">
+
+            <div class="archivo-elegido" id="archivoElegido" hidden>
+              <span class="archivo-icono" id="archivoIcono" aria-hidden="true">📄</span>
+              <span class="archivo-datos">
+                <strong id="archivoNombre"></strong>
+                <span class="archivo-meta" id="archivoMeta"></span>
+              </span>
+              <button type="button" class="boton-quitar" id="quitarArchivo" aria-label="Quitar el archivo seleccionado">
+                <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
+                  <path d="m5 5 10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+
+            <p class="zona-nota">
+              <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false">
+                <path d="M10 2.5 16 4.6v4.6c0 3.7-2.6 6.4-6 7.5-3.4-1.1-6-3.8-6-7.5V4.6L10 2.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="m7.4 9.8 1.9 1.9 3.4-3.7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>El archivo se procesa en tu equipo y se envía al modelo solo para generar la retroalimentación.</span>
+            </p>
+          </div>
+
+          <div class="paso-formulario">
+            <div class="paso-cabecera">
+              <span class="paso-numero" aria-hidden="true">2</span>
+              <div class="paso-titulos">
+                <h3>Indica cómo debe evaluarse</h3>
+                <p class="paso-ayuda">Escribe las instrucciones o súbelas como archivo (PDF, Word, Excel, imagen…). Si dejas esto vacío, se evaluará con criterios generales de logística.</p>
+              </div>
+            </div>
+
+            <label class="etiqueta-campo" for="instruccionesTexto">Instrucciones de evaluación</label>
+            <textarea id="instruccionesTexto" rows="7"
+              placeholder="Ejemplo:&#10;Evalúa este informe con la rúbrica del curso:&nbsp;&#10;1. Indicadores de gestión (30%): metas vs. reales.&#10;2. Análisis de causas (40%): explica el porqué de las desviaciones.&#10;3. Plan de acción (30%): acciones con responsable y fecha.&#10;Sé exigente pero constructivo y pon una nota final de 0 a 5."></textarea>
+
+            <div class="fila-archivo">
+              <label class="boton-secundario boton-archivo" for="archivoInstrucciones">
+                <svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true" focusable="false">
+                  <path d="M13.5 6.5 8 12a2.5 2.5 0 0 0 3.5 3.5l6-6a4.5 4.5 0 0 0-6.4-6.4l-6 6a6.5 6.5 0 0 0 9.2 9.2l5.2-5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Subir instrucciones como archivo
+              </label>
+              <input type="file" id="archivoInstrucciones" hidden
+                     accept=".pdf,.docx,.docm,.doc,.rtf,.odt,.xlsx,.xlsm,.xls,.ods,.csv,.pptx,.ppt,.odp,.png,.jpg,.jpeg,.webp,.gif,.bmp,.tif,.tiff,.txt,.md">
+              <span class="chip" id="chipInstrucciones" hidden>
+                <span class="chip-icono" aria-hidden="true">📎</span>
+                <span class="chip-nombre" id="chipInstruccionesNombre"></span>
+                <button type="button" class="chip-quitar" id="quitarInstrucciones" aria-label="Quitar el archivo de instrucciones">
+                  <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" focusable="false">
+                    <path d="m5 5 10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </span>
+            </div>
+
+            <details class="detalles-formulario">
+              <summary>Contexto adicional (opcional)</summary>
+              <div class="detalles-formulario-cuerpo">
+                <label class="etiqueta-campo etiqueta-campo--suave" for="contexto">Contexto adicional</label>
+                <input type="text" id="contexto" placeholder="Ej.: curso de Almacenamiento, nivel tecnólogo, entrega 2 de 3">
+              </div>
+            </details>
+          </div>
+
+        </div>
+
+        <div class="acciones">
+          <div class="acciones-principal">
+            <button type="button" id="botonEvaluar" class="boton-principal" disabled>Evaluar mi trabajo</button>
+            <p class="acciones-nota">La aplicación lee el documento y sus imágenes; tú solo eliges el archivo.</p>
+          </div>
+          <button type="button" id="botonLimpiar" class="boton-texto">Limpiar todo</button>
+        </div>
+      </div>
+
+      <div class="paneles">
+        <section class="panel panel-progreso" id="panelProgreso" hidden aria-labelledby="titulo-progreso">
+          <div class="panel-cabecera">
+            <span class="panel-icono panel-icono-progreso" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22">
+                <path d="M12 3.5a8.5 8.5 0 1 1-6 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h2 id="titulo-progreso">Analizando…</h2>
+          </div>
+          <div class="barra" aria-hidden="true"><div class="barra-relleno" id="barraRelleno"></div></div>
+          <p class="progreso-mensaje" id="progresoMensaje" aria-live="polite">Preparando…</p>
+          <ul class="progreso-lista" id="progresoLista"></ul>
+        </section>
+
+        <section class="panel panel-error" id="panelError" role="alert" hidden aria-labelledby="titulo-error">
+          <div class="panel-cabecera">
+            <span class="panel-icono panel-icono-error" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22">
+                <path d="M12 3.5 21 20H3L12 3.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M12 9.5v4.5M12 17.2v.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <h2 id="titulo-error">No se pudo completar la evaluación</h2>
+          </div>
+          <p id="textoError" class="texto-error"></p>
+        </section>
+
+        <section class="panel panel-resultado" id="panelResultado" hidden aria-labelledby="titulo-resultado">
+          <div class="resultado-cabecera">
+            <div class="resultado-titulo">
+              <p class="antetitulo">Resultado</p>
+              <h2 id="titulo-resultado">Retroalimentación del instructor</h2>
+            </div>
+            <div class="resultado-botones">
+              <button type="button" class="boton-secundario" id="botonCopiar">Copiar</button>
+              <button type="button" class="boton-secundario" id="botonDescargar">Descargar</button>
+            </div>
+          </div>
+          <div class="resultado-cuerpo" id="resultadoTexto"></div>
+          <div id="contenedorChecklist"></div>
+          <details class="detalles">
+            <summary>Detalles técnicos del análisis</summary>
+            <div class="detalles-cuerpo" id="resultadoDetalles"></div>
+          </details>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formatos admitidos -->
+  <section class="seccion seccion-formatos" id="formatos" aria-labelledby="titulo-formatos">
+    <div class="contenedor">
+      <header class="encabezado-seccion">
+        <p class="antetitulo">Formatos admitidos</p>
+        <h2 id="titulo-formatos">Documentos, imágenes y video</h2>
+        <p class="seccion-intro">
+          La aplicación lee el contenido por sí sola: texto, tablas, encabezados, notas al pie,
+          diapositivas, imágenes y fotogramas de video.
+        </p>
+      </header>
+
+      <div class="tabla-scroll" tabindex="0" role="region" aria-label="Tabla de formatos admitidos y cómo se analiza cada uno">
+        <table class="tabla-formatos">
+          <caption class="solo-lectores">Formatos admitidos y cómo se analiza cada uno</caption>
+          <thead>
+            <tr>
+              <th scope="col">Categoría</th>
+              <th scope="col">Extensiones</th>
+              <th scope="col">Cómo se analiza</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><span class="punto-formato pf-pdf" aria-hidden="true"></span>PDF</th>
+              <td><code>.pdf</code></td>
+              <td>Texto real; si es <strong>escaneado</strong> (sin texto) se convierte cada página a imagen y se analiza visualmente.</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="punto-formato pf-word" aria-hidden="true"></span>Word</th>
+              <td><code>.docx</code> <code>.docm</code> <code>.doc</code> <code>.rtf</code> <code>.odt</code></td>
+              <td>Texto, tablas, encabezados y notas al pie.</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="punto-formato pf-excel" aria-hidden="true"></span>Excel</th>
+              <td><code>.xlsx</code> <code>.xlsm</code> <code>.xls</code> <code>.ods</code> <code>.csv</code> <code>.tsv</code></td>
+              <td>Rejilla de celdas reconstruida con referencias (A1, B2…).</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="punto-formato pf-ppt" aria-hidden="true"></span>PowerPoint</th>
+              <td><code>.pptx</code> <code>.ppsx</code> <code>.ppt</code> <code>.odp</code></td>
+              <td>Texto por diapositiva + notas del orador.</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="punto-formato pf-imagen" aria-hidden="true"></span>Imágenes</th>
+              <td><code>.png</code> <code>.jpg</code> <code>.webp</code> <code>.gif</code> <code>.bmp</code> <code>.tif</code> <code>.heic</code> <code>.avif</code></td>
+              <td>Análisis visual directo.</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="punto-formato pf-video" aria-hidden="true"></span>Video</th>
+              <td><code>.mp4</code> <code>.mov</code> <code>.avi</code> <code>.mkv</code> <code>.webm</code> <code>.m4v</code> y otros</td>
+              <td>Fotogramas distribuidos en toda la línea de tiempo.</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="punto-formato pf-texto" aria-hidden="true"></span>Texto</th>
+              <td><code>.txt</code> <code>.md</code> <code>.log</code> <code>.json</code> <code>.xml</code> <code>.html</code> <code>.srt</code> <code>.vtt</code></td>
+              <td>Lectura directa.</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="punto-formato pf-adjunto" aria-hidden="true"></span>Incrustados</th>
+              <td><span class="sin-extension">—</span></td>
+              <td>Los diagramas, tablas y capturas dentro de Word/PPT/Excel se adjuntan como imagen.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tabla-aviso">En pantallas pequeñas puedes deslizar la tabla.</p>
+
+      <aside class="callout callout-ambar">
+        <span class="callout-icono" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M12 10.5V17M12 7.2v.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <div class="callout-texto">
+          <strong>Formatos antiguos de Office (.doc, .xls, .ppt):</strong> se intenta recuperar el texto,
+          pero la lectura puede ser parcial. Si la retroalimentación sale incompleta, guarda el archivo
+          como PDF o en formato moderno y vuelve a subirlo. La aplicación te avisa cuando esto ocurre.
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Qué analiza -->
+  <section class="seccion seccion-analiza" aria-labelledby="titulo-analiza">
+    <div class="contenedor">
+      <header class="encabezado-seccion">
+        <p class="antetitulo">Qué recibe el instructor virtual</p>
+        <h2 id="titulo-analiza">Texto, imágenes y contexto, en una sola evaluación</h2>
+        <p class="seccion-intro">
+          Por cada archivo, la aplicación extrae automáticamente el contenido que necesita para
+          evaluar, sin que tengas que activar nada.
+        </p>
+      </header>
+
+      <div class="analiza-grid">
+        <article class="tarjeta-caracteristica">
+          <span class="icono-cuadro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path d="M6 4.5h8.5L19 9v10.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-14a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M8 12h8M8 15.5h5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Texto del documento</h3>
+          <p>Con tablas y estructura: encabezados, notas al pie, celdas y diapositivas.</p>
+        </article>
+
+        <article class="tarjeta-caracteristica">
+          <span class="icono-cuadro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <rect x="3.5" y="4.5" width="17" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <circle cx="9" cy="10" r="1.6" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <path d="m4.5 17 5-4.5 3.5 3 2.5-2 4 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3>Imágenes relevantes</h3>
+          <p>Páginas escaneadas, diagramas incrustados, capturas y fotogramas de video.</p>
+        </article>
+
+        <article class="tarjeta-caracteristica">
+          <span class="icono-cuadro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path d="M4 19V9m5.3 10V5m5.4 14v-6.5M20 19V7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Datos de contexto</h3>
+          <p>Número de páginas, palabras, hojas, diapositivas, duración del video, resolución y si trae audio.</p>
+        </article>
+      </div>
+
+      <div class="multimodal">
+        <div class="multimodal-texto">
+          <span class="multimodal-icono" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26">
+              <path d="M12 3.5 14.6 9l6 .9-4.3 4.2 1 6-5.3-2.8-5.3 2.8 1-6L3.4 9.9l6-.9L12 3.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <div>
+            <h3>La aplicación es multimodal</h3>
+            <p>Además del texto, envía al modelo las imágenes para que las analice. No hay que activar nada.</p>
+          </div>
+        </div>
+
+        <div class="multimodal-cupos">
+          <div class="cupo">
+            <strong>22</strong>
+            <span>imágenes por evaluación</span>
+          </div>
+          <div class="cupo">
+            <strong>16</strong>
+            <span>imágenes incrustadas</span>
+          </div>
+          <div class="cupo">
+            <strong>14</strong>
+            <span>páginas de PDF</span>
+          </div>
+          <div class="cupo">
+            <strong>120</strong>
+            <span>páginas de PDF como máximo</span>
+          </div>
+        </div>
+      </div>
+      <p class="nota-cupos">
+        Los cupos de 16 imágenes incrustadas y 14 páginas de PDF comparten el cupo total de 22 imágenes.
+        Si el documento trae más, se envían las principales y la aplicación lo advierte en los detalles del análisis.
+      </p>
+
+      <div class="situaciones">
+        <h3>Cómo se manejan las imágenes</h3>
+        <dl class="situaciones-lista">
+          <div class="situacion">
+            <dt>Word, PowerPoint o Excel con imágenes</dt>
+            <dd>Extrae <strong>todas</strong> las imágenes incrustadas (diagramas, tablas, capturas, fotografías, firmas, iconos) y las envía al modelo, priorizando las de mayor tamaño.</dd>
+          </div>
+          <div class="situacion">
+            <dt>PDF escaneado (sin texto)</dt>
+            <dd>Convierte <strong>todas</strong> las páginas a imagen.</dd>
+          </div>
+          <div class="situacion">
+            <dt>PDF con texto que además trae imágenes</dt>
+            <dd>Detecta <strong>qué páginas contienen imágenes</strong> y las convierte, conservando también el texto.</dd>
+          </div>
+          <div class="situacion">
+            <dt>Video</dt>
+            <dd>Fotogramas distribuidos en toda la línea de tiempo.</dd>
+          </div>
+        </dl>
+        <p class="nota-decorativas">
+          Solo se descartan las imágenes verdaderamente decorativas: puntos de menos de 32×32 píxeles,
+          líneas y separadores, y las que se repiten idénticas. Todo lo demás se conserva, incluso iconos
+          pequeños. Las imágenes TIFF, BMP, EMF, WMF o SVG dentro de Office se convierten a PNG para analizarlas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Retroalimentación -->
+  <section class="seccion seccion-retro" id="retroalimentacion" aria-labelledby="titulo-retro">
+    <div class="contenedor">
+      <header class="encabezado-seccion">
+        <p class="antetitulo">Retroalimentación</p>
+        <h2 id="titulo-retro">Siempre en el mismo orden, en lenguaje sencillo</h2>
+        <p class="seccion-intro">
+          La respuesta sigue siempre el mismo orden, en lenguaje sencillo y en segunda persona, y
+          termina con la lista de verificación final.
+        </p>
+      </header>
+
+      <div class="retro-layout">
+        <ol class="linea-tiempo">
+          <li>
+            <span class="lt-num" aria-hidden="true">01</span>
+            <div class="lt-texto">
+              <h3>Qué observé</h3>
+              <p>Resumen de lo entregado.</p>
+            </div>
+          </li>
+          <li>
+            <span class="lt-num" aria-hidden="true">02</span>
+            <div class="lt-texto">
+              <h3>Lo que está bien</h3>
+              <p>Aciertos concretos, citando la evidencia del documento.</p>
+            </div>
+          </li>
+          <li>
+            <span class="lt-num" aria-hidden="true">03</span>
+            <div class="lt-texto">
+              <h3>Lo que hay que mejorar</h3>
+              <p>Punto por punto: qué falta, por qué importa en logística y cómo corregirlo.</p>
+            </div>
+          </li>
+          <li>
+            <span class="lt-num" aria-hidden="true">04</span>
+            <div class="lt-texto">
+              <h3>Recomendaciones</h3>
+              <p>Acciones prácticas y medibles.</p>
+            </div>
+          </li>
+          <li>
+            <span class="lt-num" aria-hidden="true">05</span>
+            <div class="lt-texto">
+              <h3>Cierre</h3>
+              <p>Un comentario de ánimo, realista.</p>
+            </div>
+          </li>
+        </ol>
+
+        <aside class="retro-info">
+          <h3>Lista de verificación final</h3>
+          <p>
+            Al final de toda evaluación la aplicación dibuja la tabla de verificación. Copia el formato
+            de tus instrucciones: si tu rúbrica es de casillas, sale con casillas; si es de puntaje, sale
+            con puntaje.
+          </p>
+          <ul class="lista-check">
+            <li>Los criterios aparecen en el mismo orden y con la misma redacción de tus instrucciones.</li>
+            <li>La calificación final siempre aparece en la fila TOTAL. Si el modelo no logra calcularla, la aplicación la calcula sola y la identifica con un asterisco.</li>
+            <li>Los totales se colorean: verde ≥70 %, ámbar ≥50 %, rojo por debajo.</li>
+            <li>Debajo de la tabla aparece un resumen, por ejemplo: CUMPLE SÍ: 2 de 3 criterios.</li>
+            <li>La tabla se incluye también al usar Copiar y Descargar, en formato de texto alineado.</li>
+            <li>Si el modelo no entrega la lista, la retroalimentación se conserva y se avisa en su lugar.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="muestra">
+        <div class="muestra-cabecera">
+          <div>
+            <p class="antetitulo">Ejemplo</p>
+            <h3>Lista de verificación con casillas</h3>
+          </div>
+          <p class="muestra-nota">La tabla copia el formato de tus instrucciones. Este ejemplo usa casillas y valores del 20 %.</p>
+        </div>
+
+        <div class="checklist muestra-check" tabindex="0" role="region" aria-label="Ejemplo de lista de verificación">
+          <table class="tabla-verificacion">
+            <caption class="solo-lectores">Ejemplo de lista de verificación con casillas Cumple sí y Cumple no</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="col-num">No.</th>
+                <th scope="col" class="celda-descripcion">Variables / indicadores de logro</th>
+                <th scope="col" class="col-centro">CUMPLE SÍ</th>
+                <th scope="col" class="col-centro">CUMPLE NO</th>
+                <th scope="col" class="celda-observacion">Observaciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-num">1</td>
+                <td class="celda-descripcion">Identificó la jerarquía de los cargos en el organigrama institucional. <span class="peso-criterio">20%</span></td>
+                <td class="col-centro celda-marca"><span class="marca-si">✓</span><span class="marca-valor">20%</span></td>
+                <td class="col-centro celda-marca"><span class="marca-vacia">—</span></td>
+                <td class="celda-observacion">Incluye organigrama y tabla de niveles estratégico, táctico y operativo.</td>
+              </tr>
+              <tr>
+                <td class="col-num">2</td>
+                <td class="celda-descripcion">Interpretó las necesidades del departamento humano. <span class="peso-criterio">20%</span></td>
+                <td class="col-centro celda-marca"><span class="marca-si">✓</span><span class="marca-valor">20%</span></td>
+                <td class="col-centro celda-marca"><span class="marca-vacia">—</span></td>
+                <td class="celda-observacion">Define necesidades de personal por área.</td>
+              </tr>
+              <tr>
+                <td class="col-num">3</td>
+                <td class="celda-descripcion">Diseñó el plan de acción con responsables y fechas. <span class="peso-criterio">20%</span></td>
+                <td class="col-centro celda-marca"><span class="marca-vacia">—</span></td>
+                <td class="col-centro celda-marca"><span class="marca-si marca-no">✓</span></td>
+                <td class="celda-observacion">No se definen responsables ni fechas.</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2" class="celda-total-etiqueta">TOTAL</td>
+                <td class="col-centro celda-total total-bien">2 de 3</td>
+                <td class="col-centro celda-total total-malo">1 de 3</td>
+                <td class="celda-total">
+                  <span class="chip-resultado vc-bien">Aprobado</span>
+                  <span class="puntaje-final">3.3 de 5</span>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <p class="tabla-aviso">Desliza para ver la tabla completa.</p>
+
+        <ul class="checklist-resumen">
+          <li><strong>CUMPLE SÍ:</strong> 2 de 3 criterios</li>
+          <li><strong>CUMPLE NO:</strong> 1 de 3 criterios</li>
+          <li><strong>Puntaje final:</strong> 3.3 de 5</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacidad y notas técnicas -->
+  <section class="seccion seccion-privacidad" aria-labelledby="titulo-privacidad">
+    <div class="contenedor">
+      <header class="encabezado-seccion">
+        <p class="antetitulo">Privacidad y notas técnicas</p>
+        <h2 id="titulo-privacidad">Funciona en tu equipo</h2>
+        <p class="seccion-intro">
+          Sin instalación y sin dependencias npm: PDF, canvas y ffmpeg vienen incluidos. Node.js 22.13+ es
+          lo único necesario.
+        </p>
+      </header>
+
+      <div class="privacidad-grid">
+        <article class="tarjeta-privacidad tarjeta-privacidad--destacada">
+          <span class="icono-cuadro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path d="M12 3.5 19.5 6v5.5c0 4.4-3.1 7.7-7.5 9-4.4-1.3-7.5-4.6-7.5-9V6L12 3.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="m8.8 11.8 2.3 2.3 4.2-4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3>Procesamiento local</h3>
+          <p>Funciona en tu equipo. Los archivos se procesan localmente y se envían al modelo de IA solo para generar la retroalimentación.</p>
+        </article>
+
+        <article class="tarjeta-privacidad">
+          <span class="icono-cuadro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <rect x="3.5" y="6" width="12" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <path d="m15.5 10.5 5-2.5v8l-5-2.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3>El audio del video no se transcribe</h3>
+          <p>Se analiza lo que se ve en los fotogramas. Si el video trae pista de audio, la aplicación lo advierte: una explicación hablada no se detecta.</p>
+        </article>
+
+        <article class="tarjeta-privacidad">
+          <span class="icono-cuadro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path d="M7 3.5h7L19 8.5v12h-12v-17Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M13.5 3.5V9H19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M9 14h5M9 17h3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Formatos antiguos de Office</h3>
+          <p>En .doc, .xls y .ppt se intenta recuperar el texto, pero la lectura puede ser parcial. Guarda el archivo como PDF o en formato moderno y vuelve a subirlo.</p>
+        </article>
+
+        <article class="tarjeta-privacidad">
+          <span class="icono-cuadro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <ellipse cx="12" cy="6" rx="7.5" ry="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6" fill="none" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </span>
+          <h3>Sin instalación ni dependencias npm</h3>
+          <p>Todas las dependencias están incluidas en vendor/. El servidor usa solo módulos nativos de Node (http, FormData, fetch).</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="sitio-footer">
+  <div class="contenedor footer-interno">
+    <div class="footer-marca">
+      <span class="marca-logo" aria-hidden="true">IL</span>
+      <div class="footer-texto">
+        <p class="footer-titulo">Instructor de Logística</p>
+        <p class="footer-nota">
+          Funciona en tu equipo. Los archivos se procesan localmente y se envían al modelo de IA solo
+          para generar la retroalimentación.
+        </p>
+      </div>
+    </div>
+    <div class="footer-lado">
+      <a class="footer-enlace" href="https://github.com/MrCastilloF/instructor-logistica" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+          <path d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.5.1.7-.2.7-.5v-1.7c-2.6.6-3.2-1.1-3.2-1.1-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.1-.2-4.3-1.1-4.3-4.7 0-1 .4-1.9 1-2.5-.1-.2-.4-1.2.1-2.5 0 0 .8-.3 2.6 1a8.8 8.8 0 0 1 4.7 0c1.8-1.3 2.6-1 2.6-1 .5 1.3.2 2.3.1 2.5.6.6 1 1.5 1 2.5 0 3.6-2.2 4.5-4.3 4.7.3.3.6.9.6 1.8v2.6c0 .3.2.6.7.5A9.5 9.5 0 0 0 12 2.5Z" fill="currentColor"/>
+        </svg>
+        Ver repositorio en GitHub
+      </a>
+      <p class="footer-fino">Aplicación local · Node.js 22.13+</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/app.js?v=6"></script>
+</body>
+</html>

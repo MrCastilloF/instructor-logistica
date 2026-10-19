@@ -1,0 +1,16 @@
+{
+  "name": "instructor-logistica",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Evaluador local de entregas de logística con retroalimentación de instructor: lee PDF, Office, imágenes y video y devuelve una retroalimentación estructurada con tabla de verificación.",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "node lib/server.js --open",
+    "test": "node --check public/app.js && node tests/test-tabla-render.js && node tests/test-version-servida.js && node tests/test-checklist.js && node tests/test-tabla-markdown.js && node tests/test-lista-en-prosa.js && node tests/test-ui-estructura.js",
+    "doctor": "node tests/doctor.js",
+    "preparar-vendor": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/preparar-vendor.ps1",
+    "empaquetar": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/empaquetar.ps1"
+  }
+}

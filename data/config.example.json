@@ -1,0 +1,7 @@
+{
+  "apiKey": "tu-clave-aqui",
+  "apiUrl": "https://api.deepseek.com/chat/completions",
+  "model": "deepseek-flash",
+  "port": 5599,
+  "ffmpeg": "vendor/bin/ffmpeg.exe"
+}

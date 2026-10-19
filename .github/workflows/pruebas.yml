@@ -1,0 +1,49 @@
+name: Pruebas sin IA
+
+# Solo pruebas que no necesitan vendor/ ni la API del modelo:
+# se pueden ejecutar en un clon limpio del repositorio.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pruebas:
+    name: Pruebas (Node 22, Ubuntu)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verificar la sintaxis de public/app.js
+        run: node --check public/app.js
+
+      - name: Tabla de verificación
+        run: node tests/test-tabla-render.js
+
+      - name: Versión servida sin caché
+        run: node tests/test-version-servida.js
+
+      - name: Lista de verificación (backend)
+        run: node tests/test-checklist.js
+
+      - name: Respaldo de tabla Markdown
+        run: node tests/test-tabla-markdown.js
+
+      - name: Respaldo de lista en prosa
+        run: node tests/test-lista-en-prosa.js
+
+      - name: Estructura de la interfaz
+        run: node tests/test-ui-estructura.js

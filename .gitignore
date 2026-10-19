@@ -1,0 +1,27 @@
+# Dependencias binarias: se instalan con tools/preparar-vendor.ps1.
+# El repositorio es liviano; solo se versiona vendor/README.md.
+vendor/*
+!vendor/README.md
+
+# Datos de ejecución (subidas, temporales y configuración con la clave de API)
+data/tmp/
+data/uploads/
+data/config.json
+
+# Dependencias de Node (la aplicación no declara ninguna, pero se excluyen por si acaso)
+node_modules/
+
+# Artefactos de empaquetado
+dist/
+
+# Entorno del arnés de desarrollo (credenciales locales)
+.dsh/
+
+# Archivos temporales del sistema y de ejecución
+*.tmp
+*.temp
+*.log
+~$*
+Thumbs.db
+desktop.ini
+.DS_Store
